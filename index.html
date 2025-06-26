@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sri Aadhavan Industries</title>
+  <link href="https://fonts.googleapis.com/css2?family=Albertus+Nova&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+    header {
+      background-color: #222;
+      color: white;
+      padding: 1em;
+      text-align: center;
+      font-family: 'Albertus Nova', sans-serif;
+      font-size: 2em;
+    }
+    nav {
+      background-color: #444;
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+      padding: 1em;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .container {
+      padding: 2em;
+    }
+    .search-bar {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1em;
+    }
+    input, select {
+      padding: 0.5em;
+      font-size: 1em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.75em;
+      text-align: left;
+    }
+    th {
+      background-color: #eee;
+    }
+    .footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 1.5em 1em 1em 1em;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <header>Sri Aadhavan Industries</header>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Products</a>
+    <a href="#">Billing</a>
+    <a href="#">Contact</a>
+  </nav>
+  <div class="container">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search products..." onkeyup="filterTable()" />
+      <select id="materialFilter" onchange="filterTable()">
+        <option value="">All Materials</option>
+        <option value="Steel">Steel</option>
+        <option value="Iron">Iron</option>
+        <option value="Copper">Copper</option>
+      </select>
+    </div>
+    <table id="productTable">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Material</th>
+          <th>Price (INR)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Round Rod</td>
+          <td>Steel</td>
+          <td>750</td>
+        </tr>
+        <tr>
+          <td>Flat Bar</td>
+          <td>Iron</td>
+          <td>650</td>
+        </tr>
+        <tr>
+          <td>Hex Rod</td>
+          <td>Copper</td>
+          <td>1200</td>
+        </tr>
+        <tr>
+          <td>Angle Iron</td>
+          <td>Steel</td>
+          <td>880</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="footer">
+    &copy; 2025 Sri Aadhavan Industries. All rights reserved. Website designed and developed exclusively for Sri Aadhavan Industries.
+  </div>
+
+  <script>
+    function filterTable() {
+      let search = document.getElementById('searchInput').value.toLowerCase();
+      let material = document.getElementById('materialFilter').value;
+      let table = document.getElementById('productTable');
+      let tr = table.getElementsByTagName('tr');
+
+      for (let i = 1; i < tr.length; i++) {
+        let tdName = tr[i].getElementsByTagName('td')[0];
+        let tdMat = tr[i].getElementsByTagName('td')[1];
+
+        if (tdName && tdMat) {
+          let nameText = tdName.textContent.toLowerCase();
+          let matText = tdMat.textContent;
+          if (nameText.includes(search) && (material === '' || matText === material)) {
+            tr[i].style.display = '';
+          } else {
+            tr[i].style.display = 'none';
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
+
